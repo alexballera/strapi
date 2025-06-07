@@ -1,7 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [{ hostname: process.env.IMAGE_HOSTNAME || "localhost" }],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '1337',
+        pathname: '/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: process.env.IMAGE_HOSTNAME || 'dazzling-cactus-bfe06d4754.media.strapiapp.com',
+        pathname: '/uploads/**',
+      },
+    ],
   },
   pageExtensions: ["ts", "tsx"],
   async redirects() {

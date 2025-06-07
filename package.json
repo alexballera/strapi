@@ -10,8 +10,15 @@
     "setup:strapi": "cd strapi && yarn && node --loader ts-node/esm ../scripts/copy-env.mts ./",
     "setup": "yarn install && yarn setup:next && yarn setup:strapi",
     "dev": "yarn concurrently \"cd strapi && yarn develop\" \"npx wait-on http://localhost:1337 && cd next && yarn dev\"",
+    "build": "yarn concurrently \"cd strapi && yarn build\" \"cd next && yarn build\"",
+    "build:strapi": "cd strapi && yarn build",
+    "build:next": "cd next && yarn build",
+    "start": "yarn concurrently \"cd strapi && yarn start\" \"cd next && yarn start\"",
+    "start:strapi": "cd strapi && yarn start",
+    "start:next": "cd next && yarn start",
     "seed": "cd strapi && yarn strapi import -f ./data/export_20250116105447.tar.gz --force",
     "export": "cd strapi && yarn strapi export --no-encrypt -f ./data/export_20250116105447",
+    "generate:keys": "cd strapi && yarn strapi generate",
     "repo:upstream": "git fetch upstream && git merge upstream/main"
   },
   "dependencies": {
