@@ -9,7 +9,7 @@
     "build": "strapi build",
     "strapi": "strapi",
     "deploy": "strapi deploy",
-    "seed": "strapi import -f ./data/export_with_spanish.tar.gz",
+    "seed": "yarn strapi import -f ./data/export_spanish_admin.tar.gz --force",
     "postinstall": "node ./scripts/updateUuid.js"
   },
   "devDependencies": {
