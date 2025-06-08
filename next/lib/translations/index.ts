@@ -4,15 +4,20 @@ import { fr } from './fr';
 
 export type Locale = 'es' | 'en' | 'fr';
 
-const translations = {
+// Create a base type from the Spanish translations structure
+type TranslationSchema = {
+  [K in keyof typeof es]: string;
+};
+
+const translations: Record<Locale, TranslationSchema> = {
   es,
   en,
   fr
-} as const;
+};
 
 export type TranslationKey = keyof typeof es;
 
-export function getTranslation(locale: Locale): typeof es {
+export function getTranslation(locale: Locale): TranslationSchema {
   return translations[locale] || translations.es; // Fallback a español
 }
 
