@@ -16,8 +16,8 @@
     "start": "yarn concurrently \"cd strapi && yarn start\" \"cd next && yarn start\"",
     "start:strapi": "cd strapi && yarn start",
     "start:next": "cd next && yarn start",
-    "seed": "cd strapi && yarn strapi import -f ./data/export_20250116105447.tar.gz --force",
-    "export": "cd strapi && yarn strapi export --no-encrypt -f ./data/export_20250116105447",
+    "seed": "cd strapi && yarn strapi import -f ./data/export_spanish_admin.tar.gz --force",
+    "export": "cd strapi && yarn strapi export --no-encrypt -f ./data/export_spanish_admin",
     "generate:keys": "cd strapi && yarn strapi generate",
     "repo:upstream": "git fetch upstream && git merge upstream/main"
   },
@@ -32,5 +32,6 @@
     "tar": "^7.4.3",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.4"
-  }
+  },
+  "license": "MIT"
 }
