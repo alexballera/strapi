@@ -41,13 +41,13 @@ export default async function Blog({
     filters: { locale: params.locale },
   }, false)
 
-  const localizedSlugs = blogPage.localizations?.reduce(
+  const localizedSlugs = blogPage?.localizations?.reduce(
     (acc: Record<string, string>, localization: any) => {
       acc[localization.locale] = "blog";
       return acc;
     },
     { [params.locale]: "blog" }
-  );
+  ) || { [params.locale]: "blog" };
 
   return (
     <div className="relative overflow-hidden py-20 md:py-0">

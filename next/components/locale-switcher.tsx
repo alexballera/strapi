@@ -6,6 +6,13 @@ import { usePathname } from "next/navigation";
 import { useSlugContext } from "@/app/context/SlugContext";
 import { cn } from "@/lib/utils";
 
+// Configuración de locales con información adicional
+const localeConfig = {
+  en: { name: "English", flag: "🇺🇸", code: "en" },
+  es: { name: "Español", flag: "🇪🇸", code: "es" },
+  fr: { name: "Français", flag: "🇫🇷", code: "fr" }
+};
+
 export function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
   const { state } = useSlugContext();
   const { localizedSlugs } = state;
@@ -36,20 +43,27 @@ export function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
 
   return (
     <div className="flex gap-2 p-1 rounded-md">
-      {!pathname.includes("/products/") && Object.keys(localizedSlugs).map((locale) => (
-        <Link key={locale} href={generateLocalizedPath(locale)}>
-          <div
-            className={cn(
-              "flex cursor-pointer items-center justify-center text-sm leading-[110%] w-8 py-1 rounded-md hover:bg-neutral-800 hover:text-white/80 text-white hover:shadow-[0px_1px_0px_0px_var(--neutral-600)_inset] transition duration-200",
-              locale === currentLocale
-                ? "bg-neutral-800 text-white shadow-[0px_1px_0px_0px_var(--neutral-600)_inset]"
-                : ""
-            )}
-          >
-            {locale}
-          </div>
-        </Link>
-      ))}
+      {!pathname.includes("/products/") && Object.keys(localizedSlugs).map((locale) => {
+        const config = localeConfig[locale as keyof typeof localeConfig];
+        if (!config) return null;
+        
+        return (
+          <Link key={locale} href={generateLocalizedPath(locale)}>
+            <div
+              className={cn(
+                "flex cursor-pointer items-center justify-center text-sm leading-[110%] min-w-12 px-2 py-1 rounded-md hover:bg-neutral-800 hover:text-white/80 text-white hover:shadow-[0px_1px_0px_0px_var(--neutral-600)_inset] transition duration-200",
+                locale === currentLocale
+                  ? "bg-neutral-800 text-white shadow-[0px_1px_0px_0px_var(--neutral-600)_inset]"
+                  : ""
+              )}
+              title={config.name}
+            >
+              <span className="mr-1">{config.flag}</span>
+              <span className="text-xs font-medium">{locale.toUpperCase()}</span>
+            </div>
+          </Link>
+        );
+      })}
     </div>
   );
 }

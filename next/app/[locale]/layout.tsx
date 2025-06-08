@@ -46,6 +46,18 @@ export default async function LocaleLayout({
 }) {
 
     const pageData = await fetchContentType('global', { filters: { locale } }, true);
+    
+    // Handle case where no content exists for the locale yet
+    // Fall back to English content temporarily
+    let fallbackData = null;
+    if (!pageData?.navbar || !pageData?.footer) {
+        console.log(`No content found for locale: ${locale}, falling back to English`);
+        fallbackData = await fetchContentType('global', { filters: { locale: 'en' } }, true);
+    }
+    
+    const navbarData = pageData?.navbar || fallbackData?.navbar || null;
+    const footerData = pageData?.footer || fallbackData?.footer || null;
+
     return (
         <html lang={locale}>
             <ViewTransitions>
@@ -56,9 +68,9 @@ export default async function LocaleLayout({
                             "bg-charcoal antialiased h-full w-full"
                         )}
                     >
-                        <Navbar data={pageData.navbar} locale={locale} />
+                        {navbarData && <Navbar data={navbarData} locale={locale} />}
                         {children}
-                        <Footer data={pageData.footer} locale={locale} />
+                        {footerData && <Footer data={footerData} locale={locale} />}
                     </body>
                 </CartProvider>
             </ViewTransitions>

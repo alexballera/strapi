@@ -45,13 +45,13 @@ export default async function Products({
   }, true);
   const products = await fetchContentType('products');
 
-  const localizedSlugs = productPage.localizations?.reduce(
+  const localizedSlugs = productPage?.localizations?.reduce(
     (acc: Record<string, string>, localization: any) => {
       acc[localization.locale] = "products";
       return acc;
     },
     { [params.locale]: "products" }
-  );
+  ) || { [params.locale]: "products" };
   const featured = products?.data.filter((product: { featured: boolean }) => product.featured);
 
   return (
