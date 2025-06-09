@@ -16,13 +16,16 @@
     "start": "yarn concurrently \"cd strapi && yarn start\" \"cd next && yarn start\"",
     "start:strapi": "cd strapi && yarn start",
     "start:next": "cd next && yarn start",
-    "seed": "cd strapi && yarn strapi import -f ./data/export_spanish_admin.tar.gz --force",
-    "export": "cd strapi && yarn strapi export --no-encrypt -f ./data/export_spanish_admin",
+    "seed": "cd strapi && yarn strapi import -f ./data/spanish_content_backup.tar.gz --force",
+    "export": "cd strapi && yarn strapi export --no-encrypt -f ./data/spanish_content_backup",
+    "create:spanish": "node scripts/create-complete-spanish-content.js",
+    "check:spanish": "node scripts/check-spanish-content.js",
     "generate:keys": "cd strapi && yarn strapi generate",
     "repo:upstream": "git fetch upstream && git merge upstream/main"
   },
   "dependencies": {
     "@types/node": "^22.5.2",
+    "axios": "^1.9.0",
     "concurrently": "^8.2.2",
     "typescript": "^5.0.0",
     "wait-on": "^8.0.1"

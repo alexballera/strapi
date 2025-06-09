@@ -2,8 +2,8 @@ export default () => ({
   i18n: {
     enabled: true,
     config: {
-      defaultLocale: 'en',
-      locales: ['en', 'es', 'fr']
+      defaultLocale: 'es',
+      locales: ['es', 'en', 'fr']
     }
   }
 });
